@@ -22,6 +22,9 @@ public class ArrayUtilsMethodGenerator {
 			isExclusivelyPopulatedObj(),
 			isExclusivelyPopulatedObject(),
 			isExclusivelyPopulatedPrim(),
+			equalsdObj(),
+			equalsObject(),
+			equalsPrim(),
 			foot()
 		};
 		
@@ -333,7 +336,48 @@ public class ArrayUtilsMethodGenerator {
 		
 		return methods;
 	}
+	
+	private static void equalsGen(String[] methods, int index, String type, boolean isObject) {
+		insertDoc(methods, index, "Checks if array1 is the same as array2");
+		methods[index]+= "public static boolean equals(" + type + "[] array1, " + type + "[] array2) {\n";
+		methods[index]+= "	if(array1.length != array2.length)\n";
+		methods[index]+= "		return false;\n";
+		methods[index]+= "\n	for(int i = 0; i < array1.length; i++) {\n";
+		methods[index]+= (isObject ? "		if(!array1[i].equals(array2[i]))" : "		if(array1[i] != array2[i])") + "\n";
+		methods[index]+= "			return false;\n";
+		methods[index]+= "		}\n";
+		methods[index]+= "\n	return true;\n";
+		methods[index]+= "}\n";
+	}
 
+	private static String[] equalsdObj() {
+		String[] methods = new String[types.length];
+		
+		for(int i = 0; i < methods.length; i++) {
+			String obj = types[i][1];
+			equalsGen(methods, i, obj, true);
+		}
+		
+		return methods;
+	}
+	
+	private static String[] equalsObject() {
+		String[] methods = new String[1];
+		equalsGen(methods, 0, "Object", true);
+		return methods;
+	}
+	
+	private static String[] equalsPrim() {
+		String[] methods = new String[types.length];
+		
+		for(int i = 0; i < methods.length; i++) {
+			String prim = types[i][0];
+			equalsGen(methods, i, prim, false);
+		}
+		
+		return methods;
+	}
+	
 	private final static String[][] types = {
 		{	
 			"int", "Integer"
