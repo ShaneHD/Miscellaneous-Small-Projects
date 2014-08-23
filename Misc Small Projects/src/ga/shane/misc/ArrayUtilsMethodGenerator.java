@@ -76,6 +76,10 @@ public class ArrayUtilsMethodGenerator {
 			"char", "Character"
 		}, {
 			"byte", "Byte"
+		}, {
+			"short", "Short"
+		}, {
+			"long", "Long"
 		}
 	};
 }
