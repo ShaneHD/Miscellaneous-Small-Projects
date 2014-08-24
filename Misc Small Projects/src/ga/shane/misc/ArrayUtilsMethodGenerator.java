@@ -358,16 +358,6 @@ public class ArrayUtilsMethodGenerator {
 		methods[index]+= "	}\n";
 		methods[index]+= "\n	return true;\n";
 		methods[index]+= "}\n";
-		
-		/*methods[index]+= "public static boolean equals(" + type + "[] array1, " + type + "[] array2) {\n";
-		methods[index]+= "	if(array1.length != array2.length)\n";
-		methods[index]+= "		return false;\n";
-		methods[index]+= "\n	for(int i = 0; i < array1.length; i++) {\n";
-		methods[index]+= (isObject ? "		if(array1[i] == null || array2[i] == null) {if(array1[i] != array2[i])if(!array1[i].equals(array2[i]))" : "		if(array1[i] != array2[i])") + "\n";
-		methods[index]+= "			return false;\n";
-		methods[index]+= "		}\n";
-		methods[index]+= "\n	return true;\n";
-		methods[index]+= "}\n";*/
 	}
 
 	private static String[] equalsdObj() {
