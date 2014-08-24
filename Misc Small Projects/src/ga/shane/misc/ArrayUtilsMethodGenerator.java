@@ -351,7 +351,7 @@ public class ArrayUtilsMethodGenerator {
 			methods[index]+= "		} else if(!array1[i].equals(array2[i]))\n";
 			methods[index]+= "			return false;\n";
 		} else {
-			methods[index]+= "		if(array1[1] != array2[i])\n";
+			methods[index]+= "		if(array1[i] != array2[i])\n";
 			methods[index]+= "			return false;\n";
 		}
 		
