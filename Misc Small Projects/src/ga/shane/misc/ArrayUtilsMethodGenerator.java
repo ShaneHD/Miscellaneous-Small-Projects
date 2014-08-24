@@ -31,23 +31,12 @@ public class ArrayUtilsMethodGenerator {
 		for(String[] cur : methods) {
 			for(String curm : cur) {
 				if(curm.contains("\n")) {
-					for(String line : curm.split("\n")) {
+					for(String line : curm.split("\n"))
 						System.out.println("	" + line);
-					}
 				} else
 					System.out.println(curm);
-				
-				/*if(cur != methods[0] && cur != methods[methods.length - 1])
-					curm = "	f" + curm;
-				
-				System.out.println(curm);*/
 			}
 		}
-		
-		/*for(String[] cur : methods) {
-			for(String curm : cur)
-				System.out.println(curm);
-		}*/
 	}
 		
 	private static String[] head() {
