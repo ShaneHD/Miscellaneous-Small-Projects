@@ -25,6 +25,9 @@ public class ArrayUtilsMethodGenerator {
 			equalsdObj(),
 			equalsObject(),
 			equalsPrim(),
+			joinObj(),
+			joinObject(),
+			joinPrim(),
 			foot()
 		};
 		
@@ -372,6 +375,49 @@ public class ArrayUtilsMethodGenerator {
 		for(int i = 0; i < methods.length; i++) {
 			String prim = types[i][0];
 			equalsGen(methods, i, prim, false);
+		}
+		
+		return methods;
+	}
+	
+	private static void joinGen(String[] methods, int index, String type) {
+		insertDoc(methods, index, "Join two arrays into one array");
+		methods[index]+= "public static " + type + "[] join(" + type + "[] array1, " + type + "[] array2) {\n";
+		methods[index]+= "	" + type + "[] joined = new " + type + "[array1.length + array2.length];\n";
+		methods[index]+= "\n	int last = 0;\n";
+		methods[index]+= "\n	for(int i = 0; i < array1.length; i++) {\n";
+		methods[index]+= "		joined[i] = array1[i];\n";
+		methods[index]+= "		last = i;\n";
+		methods[index]+= "	}\n";
+		methods[index]+= "\n	for(int i = 0; i < array2.length; i++)\n";
+		methods[index]+= "		joined[++last] = array2[i];\n";
+		methods[index]+= "\n	return joined;\n";
+		methods[index]+= "}\n";
+	}
+
+	private static String[] joinObj() {
+		String[] methods = new String[types.length];
+		
+		for(int i = 0; i < methods.length; i++) {
+			String obj = types[i][1];
+			joinGen(methods, i, obj);
+		}
+		
+		return methods;
+	}
+	
+	private static String[] joinObject() {
+		String[] methods = new String[1];
+		joinGen(methods, 0, "Object");
+		return methods;
+	}
+	
+	private static String[] joinPrim() {
+		String[] methods = new String[types.length];
+		
+		for(int i = 0; i < methods.length; i++) {
+			String prim = types[i][0];
+			joinGen(methods, i, prim);
 		}
 		
 		return methods;
