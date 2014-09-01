@@ -1,5 +1,7 @@
 package ga.shane.misc;
 
+import java.lang.reflect.Array;
+
 /** @author http://www.shane.ga */
 public class ArrayUtilsMethodGenerator {
 	public static void main(String[] args) {
@@ -54,6 +56,7 @@ public class ArrayUtilsMethodGenerator {
 			"package ga.shane.utilities;",
 			"",
 			"import java.util.ArrayList;",
+			"import java.lang.reflect.Array;",
 			"",
 			"/** @author http://www.shane.ga */",
 			"public class ArrayUtils {"
@@ -380,10 +383,15 @@ public class ArrayUtilsMethodGenerator {
 		return methods;
 	}
 	
-	private static void joinGen(String[] methods, int index, String type) {
+	private static void joinGen(String[] methods, int index, String type, boolean ok) {
 		insertDoc(methods, index, "Join two arrays into one array");
-		methods[index]+= "public static " + type + "[] join(" + type + "[] array1, " + type + "[] array2) {\n";
-		methods[index]+= "	" + type + "[] joined = new " + type + "[array1.length + array2.length];\n";
+		methods[index]+= "public static " + (ok ? "<T> " : "") + type + "[] join(" + type + "[] array1, " + type + "[] array2) {\n";
+		
+		if(!ok)
+			methods[index]+= "	" + type + "[] joined = new " + type + "[array1.length + array2.length];\n";
+		else
+			methods[index]+= "	T[] joined = (T[]) Array.newInstance(array1.getClass().getComponentType(), array1.length + array2.length);\n";
+		
 		methods[index]+= "\n	int last = 0;\n";
 		methods[index]+= "\n	for(int i = 0; i < array1.length; i++) {\n";
 		methods[index]+= "		joined[i] = array1[i];\n";
@@ -400,7 +408,7 @@ public class ArrayUtilsMethodGenerator {
 		
 		for(int i = 0; i < methods.length; i++) {
 			String obj = types[i][1];
-			joinGen(methods, i, obj);
+			joinGen(methods, i, obj, false);
 		}
 		
 		return methods;
@@ -408,7 +416,7 @@ public class ArrayUtilsMethodGenerator {
 	
 	private static String[] joinObject() {
 		String[] methods = new String[1];
-		joinGen(methods, 0, "Object");
+		joinGen(methods, 0, "T", true);
 		return methods;
 	}
 	
@@ -417,7 +425,7 @@ public class ArrayUtilsMethodGenerator {
 		
 		for(int i = 0; i < methods.length; i++) {
 			String prim = types[i][0];
-			joinGen(methods, i, prim);
+			joinGen(methods, i, prim, false);
 		}
 		
 		return methods;
