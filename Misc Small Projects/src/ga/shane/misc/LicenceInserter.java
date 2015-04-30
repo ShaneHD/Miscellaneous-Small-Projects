@@ -405,7 +405,7 @@ public class LicenceInserter {
 					continue;
 				
 				FileUtils.write(contents, file);
-				System.out.println("Added licence to file: " + file.getAbsolutePath());
+				System.out.println((remove ? "Removed licence from file: " : "Added licence to file: ") + file.getAbsolutePath());
 			}
 		}
 	}
