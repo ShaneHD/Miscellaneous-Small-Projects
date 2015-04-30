@@ -394,7 +394,6 @@ public class NetstatChangeInformer {
 		
 		try {
 			Process p = Runtime.getRuntime().exec("netstat -n");
-			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(p.getInputStream());
 			
 			while(scanner.hasNext()) {
@@ -407,6 +406,8 @@ public class NetstatChangeInformer {
 					netstat.add(ip);
 				} catch(Exception e) {}
 			}
+			
+			scanner.close();
 		} catch (IOException e) {
 			PCUtils.exceptionbox(e);
 			System.exit(0);
