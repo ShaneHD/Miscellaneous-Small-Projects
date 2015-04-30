@@ -364,7 +364,6 @@ Exhibit B - "Incompatible With Secondary Licenses" Notice
  */
 package ga.shane.misc;
 
-import java.lang.reflect.Array;
 
 /** @author http://www.shane.ga */
 public class ArrayUtilsMethodGenerator {

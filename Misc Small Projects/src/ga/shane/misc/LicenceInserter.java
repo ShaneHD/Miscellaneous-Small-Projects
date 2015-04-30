@@ -380,22 +380,30 @@ public class LicenceInserter {
 		licence = FileUtils.getFileContents(FileUtils.newFileInsideClasspath("ga/shane/misc/licence.txt"));
 		
 //		Start directory, will edit .java files inside it and its sub dirs
-		File dir = FileUtils.newFile("C:/Users/Shane/Documents/Java");
-		modify(dir);
+		File dir = FileUtils.newFile("C:\\Users\\Shane\\git");
+		modify(dir, false);
 	}
 	
-	static void modify(File dir) {
+	static void modify(File dir, boolean remove) {
 		System.out.println("|== " + dir.getAbsolutePath() + " ==|");
 		
 		for(File file : dir.listFiles()) {
 			if(file.isDirectory())
-				modify(file);
+				modify(file, remove);
 			else { 
 				if(!file.getName().endsWith(".java"))
 					continue;
 				
 				String contents = FileUtils.getFileContents(file);
-				contents = licence + contents;
+				boolean containsLicence = contents.contains(licence);
+				
+				if(remove && containsLicence)
+					contents = contents.replace(licence, "");
+				else if(!remove && !containsLicence)
+					contents = licence + contents;
+				else
+					continue;
+				
 				FileUtils.write(contents, file);
 				System.out.println("Added licence to file: " + file.getAbsolutePath());
 			}

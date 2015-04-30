@@ -366,9 +366,7 @@ package ga.shane.misc;
 
 import ga.shane.utilities.PCUtils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -396,6 +394,7 @@ public class NetstatChangeInformer {
 		
 		try {
 			Process p = Runtime.getRuntime().exec("netstat -n");
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(p.getInputStream());
 			
 			while(scanner.hasNext()) {
