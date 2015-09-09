@@ -370,7 +370,10 @@ import ga.shane.utilities.MapUtils;
 import ga.shane.utilities.NewLineIterator;
 import ga.shane.utilities.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.TreeMap;
 
 /** 
  * Generates config file for Sourcemod plugin "weapon paints"
@@ -379,22 +382,28 @@ import java.util.LinkedHashMap;
  * @author http://www.shane.ga
  */
 public class CSGO_WeaponSkinPluginConfigCreator {
+	private final static Comparator<String> comparator = new Comparator<String>() {
+		public int compare(String o1, String o2) {
+			return o1.compareTo(o2);
+		}
+	};
+	
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		System.out.println(StringUtils.quote("Paints") + "\n{");
 		
-		LinkedHashMap<Integer, String> skins = new LinkedHashMap<Integer, String>() {
+		TreeMap<String, Integer> skins = new TreeMap<String, Integer>(comparator) {
 			{
 				FileUtils.iterateLines(FileUtils.newFileInsideClasspath("ga/shane/misc/ids.txt"), new NewLineIterator() {
 					String weapon;
 					
 					public void onLine(String line) {
-						try {
+						try {							
 							String[] parse = line.split(" -");
 							int id = Integer.parseInt(parse[0]);
 							String name = parse[1].trim();
 							
-							put(id, name + " (" + weapon + ")");
+							put(name + " (" + weapon + ")", id);
 						} catch(Exception e) {
 							weapon = line;
 						}
@@ -403,10 +412,16 @@ public class CSGO_WeaponSkinPluginConfigCreator {
 			}
 		};
 		
+		final ArrayList<Object> dupeCheck = new ArrayList<Object>();
+		
 		MapUtils.iterate(skins, new MapIterator() {
 			@Override
 			public void on(Object k, Object v) {
-				System.out.println("	" + StringUtils.quote(v) + "\n	{\n		" + StringUtils.quote("paint") + "  " + StringUtils.quote(k) + "\n	}");
+				if(dupeCheck.contains(v))
+					return;
+				
+				dupeCheck.add(v);
+				System.out.println("	" + StringUtils.quote(k) + "\n	{\n		" + StringUtils.quote("paint") + "  " + StringUtils.quote(v) + "\n	}");
 			}
 		});
 		
