@@ -9,7 +9,7 @@ import ga.shane.utilities.BScanner;
 import ga.shane.utilities.ImageUtils;
 import ga.shane.utilities.StringUtils;
 
-/** @author http://www.shane.ga */
+/** @author https://www.github.com/ShaneHD */
 public class ImageSorterBySize {
 	public static void main(String[] args) {
 		BScanner scanner = new BScanner(System.in);

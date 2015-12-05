@@ -1,12 +1,8 @@
 package ga.shane.misc;
 
-import java.awt.Desktop;
-import java.net.URI;
-import java.util.Scanner;
-
 import ga.shane.utilities.BScanner;
 
-/** @author http://www.shane.ga */
+/** @author https://www.github.com/ShaneHD */
 public class CsgoLobbyJoiner {
 	public static void main(String[] args) {
 		try {
