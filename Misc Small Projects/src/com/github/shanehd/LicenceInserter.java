@@ -2,7 +2,7 @@ package com.github.shanehd;
 
 import java.io.File;
 
-import ga.shane.utilities.FileUtils;
+import com.github.shanehd.utilities.FileUtils;
 
 /**
  * Inserts a licence header into all src files in a directory (and its sub dirs)

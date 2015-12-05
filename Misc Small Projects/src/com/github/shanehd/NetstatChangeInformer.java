@@ -1,12 +1,12 @@
 package com.github.shanehd;
 
-import ga.shane.utilities.PCUtils;
-
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+
+import com.github.shanehd.utilities.PCUtils;
 
 /**
  * Does a netstat, waits for user input, does another one, and dipslays any new ip's

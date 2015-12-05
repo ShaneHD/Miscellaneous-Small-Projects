@@ -1,6 +1,6 @@
 package com.github.shanehd;
 
-import ga.shane.utilities.BScanner;
+import com.github.shanehd.utilities.BScanner;
 
 /** @author https://www.github.com/ShaneHD */
 public class CsgoLobbyJoiner {

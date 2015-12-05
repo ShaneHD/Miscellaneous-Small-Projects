@@ -1,9 +1,9 @@
 package com.github.shanehd;
 
-import ga.shane.utilities.ArrayUtils;
-import ga.shane.utilities.FileUtils;
-
 import java.io.File;
+
+import com.github.shanehd.utilities.ArrayUtils;
+import com.github.shanehd.utilities.FileUtils;
 
 /** 
  * @author https://www.github.com/ShaneHD

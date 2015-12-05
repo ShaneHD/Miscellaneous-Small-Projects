@@ -5,9 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import ga.shane.utilities.BScanner;
-import ga.shane.utilities.ImageUtils;
-import ga.shane.utilities.StringUtils;
+import com.github.shanehd.utilities.BScanner;
+import com.github.shanehd.utilities.ImageUtils;
+import com.github.shanehd.utilities.StringUtils;
 
 /** @author https://www.github.com/ShaneHD */
 public class ImageSorterBySize {
