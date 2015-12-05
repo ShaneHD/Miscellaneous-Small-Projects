@@ -1,4 +1,4 @@
-package ga.shane.misc;
+package com.github.shanehd;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

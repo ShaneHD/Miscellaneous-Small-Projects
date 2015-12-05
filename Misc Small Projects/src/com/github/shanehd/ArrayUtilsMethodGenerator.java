@@ -1,4 +1,4 @@
-package ga.shane.misc;
+package com.github.shanehd;
 
 
 /** @author https://www.github.com/ShaneHD */

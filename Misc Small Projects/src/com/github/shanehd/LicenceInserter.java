@@ -1,4 +1,4 @@
-package ga.shane.misc;
+package com.github.shanehd;
 
 import java.io.File;
 
@@ -16,34 +16,11 @@ public class LicenceInserter {
 //		Start directory, will edit .java files inside it and its sub dirs
 		File dir = FileUtils.newFile("C:\\Users\\Shane\\git");
 		
-		modurl(dir);
-				
-		if(true)
-			return;
-		
 		licence = FileUtils.getFileContents(FileUtils.newFileInsideClasspath("ga/shane/misc/licence.txt"));
 		modify(dir, true);
+
 	}
-	
-	static void modurl(File dir) {
-		for(File file : dir.listFiles()) {
-			if(file.isDirectory())
-				modurl(file);
-			else {
-				if(!file.getName().endsWith(".java"))
-					continue;
-				
-				String contents = FileUtils.getFileContents(file);
-				
-				if(contents.contains("https://www.github.com/ShaneHD"))
-					contents = contents.replaceAll("https://www.github.com/ShaneHD", "https://www.github.com/ShaneHD");
-				
-				FileUtils.write(contents, file);
-				System.out.println("Changed url in: " + file.getName());
-			}
-		}
-	}
-	
+
 	static void modify(File dir, boolean remove) {
 		System.out.println("|== " + dir.getAbsolutePath() + " ==|");
 		

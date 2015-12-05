@@ -1,4 +1,4 @@
-package ga.shane.misc;
+package com.github.shanehd;
 
 import ga.shane.utilities.PCUtils;
 
