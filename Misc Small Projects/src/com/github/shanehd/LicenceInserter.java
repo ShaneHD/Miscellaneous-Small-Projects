@@ -11,16 +11,27 @@ import com.github.shanehd.utilities.FileUtils;
  */
 public class LicenceInserter {
 	static String licence;
+	final static String[] extensions = {
+		"java", "kt"	
+	};
 	
 	public static void main(String[] args) {
 //		Start directory, will edit .java files inside it and its sub dirs
 		File dir = FileUtils.newFile("C:\\Users\\Shane\\git");
 		
-		licence = FileUtils.getFileContents(FileUtils.newFileInsideClasspath("ga/shane/misc/licence.txt"));
+		licence = FileUtils.getFileContents(FileUtils.newFileInsideClasspath("com/github/shanehd/licence.txt"));
 		modify(dir, true);
-
 	}
 
+	static boolean allow(File file) {
+		for(String ext : extensions) {
+			if(file.getName().endsWith("." + ext))
+				return true;
+		}
+		
+		return false;
+	}
+	
 	static void modify(File dir, boolean remove) {
 		System.out.println("|== " + dir.getAbsolutePath() + " ==|");
 		
@@ -28,7 +39,7 @@ public class LicenceInserter {
 			if(file.isDirectory())
 				modify(file, remove);
 			else { 
-				if(!file.getName().endsWith(".java"))
+				if(!allow(file))
 					continue;
 				
 				String contents = FileUtils.getFileContents(file);
