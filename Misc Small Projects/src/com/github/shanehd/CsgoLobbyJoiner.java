@@ -2,6 +2,9 @@ package com.github.shanehd;
 
 import com.github.shanehd.utilities.BScanner;
 
+import java.awt.*;
+import java.net.URI;
+
 /** @author https://www.github.com/ShaneHD */
 public class CsgoLobbyJoiner {
 	public static void main(String[] args) {
@@ -39,7 +42,7 @@ public class CsgoLobbyJoiner {
 				System.out.println("Joining: " + lobby);
 				System.out.println(id);
 				
-				//Desktop.getDesktop().browse(URI.create(lobby));
+				Desktop.getDesktop().browse(URI.create(lobby));
 			}
 		} catch(Exception e) {
 			throw(new RuntimeException(e));
