@@ -17,7 +17,7 @@ public class SteamInvoiceTotalCalculator {
             String fileDir = args[0];
             String currencyPrefix = args[1];
 
-            File file = new File(args[0]);
+            File file = new File(fileDir);
             Scanner scanner = new Scanner(file);
 
             int invoiceAmount = 0;
