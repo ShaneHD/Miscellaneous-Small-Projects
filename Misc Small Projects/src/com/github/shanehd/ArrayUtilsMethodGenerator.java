@@ -29,6 +29,9 @@ public class ArrayUtilsMethodGenerator {
 			joinObj(),
 			joinObject(),
 			joinPrim(),
+			shiftObj(),
+			shiftObject(),
+			shiftPrim(),
 			foot()
 		};
 		
@@ -52,10 +55,11 @@ public class ArrayUtilsMethodGenerator {
 			"	 ################################################################",
 			"	*/",
 			"",
-			"package ga.shane.utilities;",
+			"package com.github.shanehd.utilities;",
 			"",
 			"import java.util.ArrayList;",
 			"import java.lang.reflect.Array;",
+			"import java.util.List;",
 			"",
 			"/** @author https://www.github.com/ShaneHD */",
 			"public class ArrayUtils {"
@@ -427,6 +431,52 @@ public class ArrayUtilsMethodGenerator {
 			joinGen(methods, i, prim, false);
 		}
 		
+		return methods;
+	}
+
+	private static void shiftGen(String[] methods, int index, String type, boolean ok) {
+		insertDoc(methods, index, "Shifts the array left, removing items");
+		methods[index]+= "public static " + (ok ? "<T> " : "") + type + "[] shift(int count, " + type + "[] array) {\n";
+		methods[index]+= "	if(count < 1 || count > array.length)\n";
+		methods[index]+= "		throw new RuntimeException(\"Value cannot be above the array's size.\");\n";
+
+		if(!ok)
+			methods[index]+= "\n	" + type + "[] clone = new " + type + "[array.length - count];\n";
+		else
+			methods[index]+= "\n	T[] clone = (T[]) Array.newInstance(array.getClass().getComponentType(), array.length - count);\n";
+
+		methods[index]+= "\n	for(int i = count; i < array.length; i++) {\n";
+		methods[index]+= "		clone[i - count] = array[i];\n";
+		methods[index]+= "	}\n";
+		methods[index]+= "\n	return clone;\n";
+		methods[index]+= "}\n";
+	}
+
+	private static String[] shiftObj() {
+		String[] methods = new String[types.length];
+
+		for(int i = 0; i < methods.length; i++) {
+			String obj = types[i][1];
+			shiftGen(methods, i, obj, false);
+		}
+
+		return methods;
+	}
+
+	private static String[] shiftObject() {
+		String[] methods = new String[1];
+		shiftGen(methods, 0, "T", true);
+		return methods;
+	}
+
+	private static String[] shiftPrim() {
+		String[] methods = new String[types.length];
+
+		for(int i = 0; i < methods.length; i++) {
+			String prim = types[i][0];
+			shiftGen(methods, i, prim, false);
+		}
+
 		return methods;
 	}
 	
